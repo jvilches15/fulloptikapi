@@ -1,0 +1,153 @@
+/* Reset de estilos para mejorar la consistencia entre navegadores */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+header nav ul li {
+  margin: 0 15px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #f7b500; /* Color de resaltado al pasar el mouse */
+}
+
+/* Main Content */
+main {
+  padding: 40px 15px;
+}
+
+main h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Estilos para cada sección de lentes */
+.Lentes {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 20px;
+  text-align: center;
+}
+
+.Lentes img {
+  width: 80%;
+  max-width: 300px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.Lentes h3 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.Lentes p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.Lentes strong {
+  color: #333;
+}
+
+.quantity-container {
+  margin-bottom: 20px;
+}
+
+.quantity-container select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  width: 60px;
+  text-align: center;
+  background-color: #f7f7f7;
+}
+
+.payment-btn {
+  background-color: #f7b500;
+  color: white;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.payment-btn:hover {
+  background-color: #d69b00; /* Color al pasar el mouse */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  header nav ul li {
+    margin: 10px 0;
+  }
+
+  .Lentes {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .Lentes img {
+    width: 90%;
+  }
+
+  .quantity-container select {
+    width: 50px;
+  }
+}

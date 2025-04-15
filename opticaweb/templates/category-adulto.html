@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lentes de adultos</title>
+
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+  <link rel="stylesheet" href="{% static 'css/categorystyle.css' %}">
+</head>
+<body class="bg-light text-dark">
+
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Full Optik</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{% url 'adulto' %}">Lentes Adultos</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'infantil' %}">Lentes Infantiles</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'sobrelentes' %}">Sobrelentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'sol' %}">Lentes de Sol</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="container my-5">
+    <h2 class="text-center mb-5">Lentes de Adultos</h2>
+
+    <div class="row g-4">
+
+    
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/baron2.PNG' %}" class="card-img-top" alt="Lentes Varon Elegante">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes Varon estilo Elegante</h5>
+            <p class="card-text">Lentes elegantes perfectos para destacar y potenciar tu estilo.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="quantity1" class="form-label">Cantidad:</label>
+              <select id="quantity1" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+
+  
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/lentebaron.PNG' %}" class="card-img-top" alt="Lentes Varon Aviador">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes Varon estilo Aviador</h5>
+            <p class="card-text">Combinan funcionalidad y estilo, ofrecen una apariencia elegante y sofisticada.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="quantity2" class="form-label">Cantidad:</label>
+              <select id="quantity2" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+
+ 
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/baron2.PNG' %}" class="card-img-top" alt="Lentes Varon Normal">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes Varon estilo Normal</h5>
+            <p class="card-text">Diseño sencillo y funcional sin sacrificar el estilo. Se adaptan a cualquier ocasión.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="quantity3" class="form-label">Cantidad:</label>
+              <select id="quantity3" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

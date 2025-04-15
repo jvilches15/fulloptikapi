@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lentes infantiles</title>
+  <link rel="stylesheet" href="{% static 'opticaweb/css/style.css' %}">
+
+  
+</head>
+<body>
+  <header>
+    <h1>Full Optik</h1>
+    <nav>
+        <ul>
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{% url 'adulto' %}">Lentes Adultos</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'infantil' %}">Lentes Infantiles</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'sobrelentes' %}">Sobrelentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'sol' %}">Lentes de Sol</a></li>
+            
+          </ul>
+        
+      </ul>
+    </nav>
+  </header>
+<section id="about">
+    <h2>¿Quiénes somos?</h2>
+    <p>En <strong>Full Optik</strong>, nos especializamos en ofrecer los mejores lentes de sol, lentes ópticos y sobre lentes de alta calidad. Con más de 10 años de experiencia en el sector, nuestra misión es brindarte productos con la mejor protección UV y el estilo más moderno. Nos enorgullece ofrecer atención personalizada para encontrar las mejores opciones que se ajusten a tus necesidades.</p>
+    
+    <h3>Ubicación</h3>
+    <p><strong>Dirección:</strong> Enrique Mac Iver 125, local 8, 8320000 Santiago, Región Metropolitana, Chile.</p>
+    <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 AM a 7:00 PM, Sábados de 10:00 AM a 3:00 PM.</p>
+
+    <h3>Contacto</h3>
+    <p><strong>Teléfono:</strong> +56 9 42980755</p>
+    <p><strong>Correo electrónico:</strong> gav.419@gmail.com</p>
+
+    <h3>Visítanos</h3>
+    <p>Ven a nuestra tienda y recibe asesoramiento personalizado de nuestros expertos. Te ayudaremos a elegir el par de lentes que mejor se adapte a tu estilo y necesidades.</p>
+
+    <!-- Mapa de ubicación (opcional) -->
+    <h3>Ubícanos en el mapa:</h3>
+    <iframe src="https://maps.google.com/maps/search/Enrique%20Mac%20Iver%20125%2C%20local%208%2C%208320000%20Santiago%2C%20Regi%C3%B3n%20Metropolitana%2C%20Chile/@-33.4412,-70.6464,17z?hl=es" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <p>Síguenos en nuestras redes sociales:</p>
+    <ul>
+      <li><a href="https://www.facebook.com/profile.php?id=100063531491373&mibextid=ZbWKwL">Facebook</a></li>
+      <li><a href="https://www.instagram.com/fulloptik/">Instagram</a></li>
+      <li><a href="+56942980755">WhatsApp</a></li>
+      <li><a href="https://www.google.com/maps/place/Enrique+Mac+Iver+125,+piso+8,+8320218+Santiago,+Región+Metropolitana/@-33.4412,-70.6464,17z/data=!4m6!3m5!1s0x9662c5a1c2ddd04b:0x55b3a85e7f26729b!8m2!3d-33.4412827!4d-70.6463001!16s%2Fg%2F11y30s3vwy?hl=es&entry=ttu&g_ep=EgoyMDI1MDMyNC4wIKXMDSoASAFQAw%3D%3D
+        ">Map</a></li>
+    </ul>
+</section>
+
+  
+
+</body>
+</html>

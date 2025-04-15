@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lentes de Sol</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/categorystyle.css' %}">
+</head>
+<body class="bg-light text-dark">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Full Optik</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'adulto' %}">Lentes Adultos</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'infantil' %}">Lentes Infantiles</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'sobrelentes' %}">Sobrelentes</a></li>
+          <li class="nav-item"><a class="nav-link active" href="{% url 'sol' %}">Lentes de Sol</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container my-5">
+    <h2 class="text-center mb-5">Lentes de Sol</h2>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/sol1.PNG' %}" class="card-img-top" alt="Lentes Mujer estilo Sofisticado">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes Mujer estilo Sofisticado</h5>
+            <p class="card-text">Accesorio perfecto para añadir estilo a cualquier look.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="sol1-cantidad" class="form-label">Cantidad:</label>
+              <select id="sol1-cantidad" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/sol2.PNG' %}" class="card-img-top" alt="Lentes de Sol estilo Leopardo">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes de Sol estilo Leopardo</h5>
+            <p class="card-text">Ideal para quienes buscan un toque de audacia y elegancia.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="sol2-cantidad" class="form-label">Cantidad:</label>
+              <select id="sol2-cantidad" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <img src="{% static 'img/sol3.PNG' %}" class="card-img-top" alt="Lentes de Sol negros Unisex">
+          <div class="card-body text-center">
+            <h5 class="card-title">Lentes de Sol negros Unisex</h5>
+            <p class="card-text">Se adaptan tanto a hombres como mujeres, con cualquier estilo.</p>
+            <p class="fw-bold">Precio: $59.990</p>
+            <div class="mb-3">
+              <label for="sol3-cantidad" class="form-label">Cantidad:</label>
+              <select id="sol3-cantidad" class="form-select w-auto d-inline-block">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <button class="btn btn-warning" onclick="procesoDePago()">Realizar Pago</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
