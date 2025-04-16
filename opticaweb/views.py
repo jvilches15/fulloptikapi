@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import UserProfileForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from .models import UserProfile
+from django.http import JsonResponse
 
 def index(request):
     return render(request, 'index.html')
@@ -25,31 +29,34 @@ def registro(request):
      if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
-            # Guardar el nuevo usuario en la base de datos
             form.save()
-            # Redirigir al usuario a la página de perfil o login después de registrar
-            return redirect('perfil')  # Redirige al perfil
+            return redirect('perfil')
      else:
         form = UserProfileForm()
     
      return render(request, 'registro.html', {'form': form})
 
-@login_required
+@login_required(login_url='login')
 def perfil(request):
-    if request.method == 'POST':
-        rut = request.POST['rut']
-        password = request.POST['password']
+    perfil, created = UserProfile.objects.get_or_create(user=request.user)
 
-        user = authenticate(request, username=rut, password=password)
-
-        if user is not None:
-            login(request, user)
+    if request.method == 'POST' and request.FILES:
+        form = UserProfileForm(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
             return redirect('perfil')  
-        else:
-            return render(request, 'login.html', {'error': 'RUT o contraseña incorrectos'})
-    
-    return render(request, 'login.html')
+    else:
+        form = UserProfileForm(instance=perfil)
 
-def reset_password(request):
-    return render(request, 'reset_password.html')
+    return render(request, 'perfil.html', {
+        'user': request.user,
+        'userprofile': perfil,
+        'form': form
+    })
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('index')
+
+
+
 # Create your views here.

@@ -1,6 +1,73 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block content %}
-<h2>Bienvenido a tu perfil, {{ user.username }}</h2>
-<p>Aquí puedes ver y modificar tus datos.</p>
-<a href="{% url 'logout' %}">Cerrar sesión</a>
+<div class="container mt-4">
+  <h2>Perfil de {{ user.get_full_name|default:user.username }}</h2>
+
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      
+      <div class="profile-image-container">
+      {% if userprofile.image %}
+        <img id="profile-image" src="{{ userprofile.image.url }}" alt="Imagen de perfil" class="img-fluid mb-2" style="width: 150px; height: 150px; border-radius: 50%;">
+      {% else %}
+        <p>No tienes una imagen de perfil.</p>
+      {% endif %}
+      
+    </div>
+      <button type="button" class="btn btn-primary" id="upload-btn">Cambiar Foto</button>
+      
+      
+      <input type="file" name="image" id="image-input" class="form-control mt-2" style="display:none;">
+    </div>
+
+
+  </form>
+
+  <div class="mb-3">
+    <label class="form-label">Nombre Completo:</label>
+    <p>{{ user.get_full_name }}</p> 
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Correo Electrónico:</label>
+    <p>{{ user.email }}</p>  
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">RUT:</label>
+    <p>{{ userprofile.rut }}</p>  
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Fecha de nacimiento:</label>
+    <p>{{ userprofile.date_of_birth }}</p>  
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Dirección:</label>
+    <p>{{ userprofile.address }}</p>  
+  </div>
+</div>
+
+<script>
+  
+  document.getElementById('upload-btn').addEventListener('click', function() {
+    document.getElementById('image-input').click();
+  });
+
+ 
+  document.getElementById('image-input').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('profile-image').src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
 {% endblock %}

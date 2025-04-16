@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import path
 from opticaweb import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('', views.index, name='index'),
     path('login/', auth_views.LoginView.as_view(template_name='index.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     path('adulto/', views.adulto, name='adulto'),
     path('infantil/', views.infantil, name='infantil'),
     path('sobrelentes/', views.sobrelentes, name='sobrelentes'),
@@ -30,5 +33,10 @@ urlpatterns = [
     path('nosotros/', views.nosotros, name='nosotros'),
     path('registro/', views.registro, name='registro'),
     path('perfil/', views.perfil, name='perfil'),
-    path('reset-password/', views.reset_password, name='reset_password'),
+    path('logout/', views.cerrar_sesion, name='logout'),
+    
+    
+    
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

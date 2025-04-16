@@ -24,20 +24,23 @@
         </div>
         <div class="col-md-4 col-6 text-end">
           {% if not user.is_authenticated %}
-          <form method="post" action="{% url 'login' %}" class="d-flex gap-2 align-items-center">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Usuario" class="form-control form-control-sm" required>
-            <input type="password" name="password" placeholder="Contraseña" class="form-control form-control-sm" required>
-            <button type="submit" class="btn btn-primary btn-sm">Ingresar</button>
-          </form>
+            <form method="post" action="{% url 'login' %}" class="d-flex gap-2 align-items-center">
+              {% csrf_token %}
+              <input type="text" name="username" placeholder="Usuario (RUT)" class="form-control form-control-sm" required>
+              <input type="password" name="password" placeholder="Contraseña" class="form-control form-control-sm" required>
+              <button type="submit" class="btn btn-dark mt-auto">Ingresar</button>
+            </form>
           {% else %}
-            <div>
-              <p class="mb-0">Bienvenido, {{ user.username }}</p>
-              <a href="{% url 'perfil' %}" class="btn btn-outline-secondary btn-sm">Perfil</a>
-              <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Cerrar sesión</a>
+            <div class="d-flex flex-column align-items-end">
+              <span class="mb-1 small text-muted">Bienvenido, {{ user.get_full_name }}</span>
+              <div class="d-flex gap-2">
+                <a href="{% url 'perfil' %}" class="btn btn-outline-secondary btn-sm">Perfil</a>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Cerrar sesión</a>
+              </div>
             </div>
           {% endif %}
         </div>
+        
       </div>
     </div>
     <nav class="bg-dark">
