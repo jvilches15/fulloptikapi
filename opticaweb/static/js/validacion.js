@@ -27,3 +27,28 @@ function validateForm() {
   
     return true;
   }
+  $(document).ready(function () {
+    $('#id_region').change(function () {
+      var regionId = $(this).val();
+  
+      if (regionId) {
+        $.ajax({
+          url: '/obtener-comunas/', // esta URL la defines en urls.py
+          data: {
+            'region_id': regionId
+          },
+          success: function (data) {
+            var comunaSelect = $('#id_comuna');
+            comunaSelect.empty();
+            comunaSelect.append('<option value="">Seleccione una comuna</option>');
+            data.forEach(function (comuna) {
+              comunaSelect.append(`<option value="${comuna.id}">${comuna.nombre}</option>`);
+            });
+          }
+        });
+      } else {
+        $('#id_comuna').empty();
+        $('#id_comuna').append('<option value="">Seleccione una comuna</option>');
+      }
+    });
+  });

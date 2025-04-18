@@ -1,19 +1,16 @@
-/* Reset de estilos para mejorar la consistencia entre navegadores */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Estilos generales */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background-color: #9b9595;
   color: #333;
   line-height: 1.6;
 }
 
-/* Encabezado */
 header {
   background-color: #333;
   color: white;
@@ -46,12 +43,12 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-  color: #f7b500; /* Color de resaltado al pasar el mouse */
+  color: #f7b500;
 }
 
-/* Main Content */
 main {
   padding: 40px 15px;
+  position: relative;
 }
 
 main h2 {
@@ -60,7 +57,6 @@ main h2 {
   margin-bottom: 30px;
 }
 
-/* Estilos para cada sección de lentes */
 .Lentes {
   background-color: white;
   border-radius: 10px;
@@ -69,11 +65,12 @@ main h2 {
   max-width: 1200px;
   padding: 20px;
   text-align: center;
+  flex: 1 1 30%;
 }
 
 .Lentes img {
   width: 80%;
-  max-width: 300px;
+  max-width: 250px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
@@ -120,10 +117,43 @@ main h2 {
 }
 
 .payment-btn:hover {
-  background-color: #d69b00; /* Color al pasar el mouse */
+  background-color: #d69b00;
 }
 
-/* Responsive Design */
+.video-publicidad {
+  width: 100%;
+  height: 200px; /* Ajusta el tamaño del video según lo desees */
+  object-fit: cover;
+  margin-top: 20px; /* Esto coloca un espacio entre el título y el video */
+}
+.banner-left {
+  position: relative;
+  z-index: 1;
+}
+
+.banner-left video {
+  height: 300px; 
+  object-fit: cover;
+  width: 100%;
+}
+
+.row.g-4 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.col-md-8 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-img-top {
+  position: relative;
+  z-index: 2;
+}
+
 @media (max-width: 768px) {
   header h1 {
     font-size: 2rem;
@@ -150,4 +180,10 @@ main h2 {
   .quantity-container select {
     width: 50px;
   }
+
+  .banner-left video {
+    width: 100%;
+    height: 200px;
+  }
 }
+

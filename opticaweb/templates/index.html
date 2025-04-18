@@ -29,7 +29,11 @@
               <input type="text" name="username" placeholder="Usuario (RUT)" class="form-control form-control-sm" required>
               <input type="password" name="password" placeholder="Contraseña" class="form-control form-control-sm" required>
               <button type="submit" class="btn btn-dark mt-auto">Ingresar</button>
+              <div class="text-end mt-1">
+                <a href="{% url 'reset_password_page' %}" class="text-decoration-none small">¿Olvidaste tu contraseña?</a>
+              </div>
             </form>
+            
           {% else %}
             <div class="d-flex flex-column align-items-end">
               <span class="mb-1 small text-muted">Bienvenido, {{ user.get_full_name }}</span>
@@ -51,7 +55,7 @@
           <li class="nav-item"><a href="{% url 'sobrelentes' %}" class="nav-link text-white">Sobrelentes</a></li>
           <li class="nav-item"><a href="{% url 'sol' %}" class="nav-link text-white">Lentes de Sol</a></li>
           <li class="nav-item"><a href="{% url 'nosotros' %}" class="nav-link text-white">Nosotros</a></li>
-          <li class="nav-item"><a href="{% url 'registro' %}" class="nav-link text-white">Registro</a></li>
+          
         </ul>
       </div>
     </nav>
