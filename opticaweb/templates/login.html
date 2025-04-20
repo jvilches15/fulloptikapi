@@ -8,7 +8,11 @@
   <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-
+  <nav class="navbar navbar-light bg-light justify-content-end px-4 py-2">
+    <a class="btn btn-outline-secondary" href="{% url 'login_admin' %}">
+      Ingresar como Colaborador / Administrador
+    </a>
+  </nav>
   <div class="banner">
     <img src="{% static 'img/gafas_gif.png' %}" alt="Gafas en movimiento" class="animated-glasses">
   </div>
@@ -21,6 +25,7 @@
         <h2 class="fw-bold">FullOptik</h2>
         <p class="mb-0">¡Bienvenido de nuevo!</p>
       </div>
+      
 
       {% if messages %}
         {% for message in messages %}
@@ -54,6 +59,11 @@
       </form>
     </div>
   </div>
+  <nav class="navbar navbar-light bg-light justify-content-end px-4 py-2">
+    <a class="btn btn-outline-secondary" href="{% url 'login_admin' %}">
+      Ingresar como Colaborador / Administrador
+    </a>
+  </nav>
   <footer class="bg-light text-center py-3 mt-5">
     <p>© 2025 FullOptik. Todos los derechos reservados.</p>
 </footer>

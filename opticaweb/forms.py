@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import UserProfile, Region, Comuna
 from django.contrib.auth.hashers import make_password
+from .models import Cita
+from django.utils import timezone
 
 class UserProfileForm(forms.ModelForm):
     full_name = forms.CharField(label="Nombre Completo")
@@ -21,7 +23,7 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
-        # Si se ha seleccionado una región
+    
         if 'region' in self.data:
             try:
                 region_id = int(self.data.get('region'))
@@ -85,7 +87,7 @@ class EditProfileForm(forms.ModelForm):
                 self.fields['comuna'].initial = user.userprofile.comuna
                 self.fields['comuna'].queryset = Comuna.objects.filter(region=user.userprofile.region)
 
-        # Si se ha enviado la región, filtramos las comunas
+   
         if 'region' in self.data:
             try:
                 region_id = int(self.data.get('region'))
@@ -106,3 +108,17 @@ class EditProfileForm(forms.ModelForm):
             profile.save()
         return user
 
+class CitaForm(forms.ModelForm):
+    class Meta:
+        model = Cita
+        fields = ['fecha', 'motivo']
+        widgets = {
+            'fecha': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+            'motivo': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+        }
+
+    def clean_fecha(self):
+        fecha = self.cleaned_data['fecha']
+        if fecha < timezone.now():
+            raise forms.ValidationError("No se puede agendar una fecha pasada.")
+        return fecha

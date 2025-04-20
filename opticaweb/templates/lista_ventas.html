@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-5">
+    <h2>Lista de Ventas</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Total</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for venta in ventas %}
+          <tr>
+            <td>{{ venta.producto.nombre }}</td>
+            <td>{{ venta.cantidad }}</td>
+            <td>${{ venta.total }}</td>
+            <td>{{ venta.fecha }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'panel_colaborador' %}" class="btn btn-secondary mt-3">Volver</a>
+  </div>
+{% endblock %}

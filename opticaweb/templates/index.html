@@ -54,6 +54,7 @@
           <li class="nav-item"><a href="{% url 'infantil' %}" class="nav-link text-white">Lentes Infantiles</a></li>
           <li class="nav-item"><a href="{% url 'sobrelentes' %}" class="nav-link text-white">Sobrelentes</a></li>
           <li class="nav-item"><a href="{% url 'sol' %}" class="nav-link text-white">Lentes de Sol</a></li>
+          <li class="nav-item"><a href="{% url 'agendar_cita' %}" class="nav-link text-white">Agendar Cita</a></li>
           <li class="nav-item"><a href="{% url 'nosotros' %}" class="nav-link text-white">Nosotros</a></li>
           
         </ul>
@@ -114,7 +115,11 @@
       </div>
     </div>
 </main>
-
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+  {% endfor %}
+{% endif %}
 <footer>
   <p>&copy; 2025 FullOptik. Todos los derechos reservados.</p>
 </footer>

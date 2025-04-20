@@ -1,0 +1,97 @@
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 30px;
+}
+
+
+form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.form-label {
+    font-weight: bold;
+    color: #495057;
+}
+
+
+input[type="text"], input[type="number"], textarea, input[type="file"] {
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+    width: 100%;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    margin-bottom: 15px;
+}
+
+
+input:invalid, textarea:invalid {
+    border-color: #e74c3c;
+}
+
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    color: white;
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    color: white;
+}
+
+
+a {
+    text-decoration: none;
+}
+
+
+input:invalid, textarea:invalid {
+    border-color: #e74c3c;
+}
+
+input:valid, textarea:valid {
+    border-color: #28a745;
+}

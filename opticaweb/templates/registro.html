@@ -44,7 +44,7 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
-      $('#id').change(function () {
+      $('#id_region').change(function () {
         var regionId = $(this).val();
         $.ajax({
           url: "{% url 'cargar_comunas' %}",
@@ -52,7 +52,7 @@
             'region_id': regionId
           },
           success: function (data) {
-            var comunaSelect = $('#id');
+            var comunaSelect = $('#id_comuna');
             comunaSelect.empty();
             comunaSelect.append('<option value="">Seleccione una comuna</option>');
             data.forEach(function (comuna) {
