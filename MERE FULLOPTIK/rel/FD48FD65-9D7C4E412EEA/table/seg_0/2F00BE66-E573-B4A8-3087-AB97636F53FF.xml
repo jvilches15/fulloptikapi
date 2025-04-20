@@ -1,0 +1,95 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2F00BE66-E573-B4A8-3087-AB97636F53FF" name="OPTICAWEB_PRODUCTO">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>7FDDD8C9-A90E-DDF1-C4DB-A2099FAC7927</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_PRODUCTO" id="23AF6E72-A884-2A09-EF2B-C20E28689894">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>3B744EB3-E958-B687-B700-4E257C1FC7FC</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOMBRE_PRODUCTO" id="FF3975F8-E6C7-A7AE-2CBD-B21E7A20380F">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>A81759CF-2DEC-FBE9-FF06-055D535E8963</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DESCRIPCION" id="ADE295C1-438C-E1C1-B6E9-4B18CE216DC6">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>42484558-802E-4C37-A364-BEDFBE80CD2D</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1000</dataTypeSize>
+<ownDataTypeParameters>1000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PRECIO" id="32368E6B-B7BF-9AFD-6360-0BFD89278645">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>44394F64-8608-BF5E-4E6F-836FC8AFCFE7</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="STOCK" id="18063C6C-2B63-38C8-38C1-93DBCF740C65">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>944A9032-169C-D427-F7AB-92A39429F7E1</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IMAGEN" id="C6A53AEC-AB17-830C-C423-434EEA7BED0B">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>C0B97B86-9938-AAB4-144B-8FA16FE95A82</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT010</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7C510A66-2D74-508B-712F-BDEA3CDA9455" name="OPTICAWEB_PRODUCTO_PK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>500CC920-B9AC-1243-6759-A1872EF6C77A</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="23AF6E72-A884-2A09-EF2B-C20E28689894"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

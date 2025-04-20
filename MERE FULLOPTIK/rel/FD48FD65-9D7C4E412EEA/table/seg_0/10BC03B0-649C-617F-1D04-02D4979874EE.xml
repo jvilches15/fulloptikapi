@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="10BC03B0-649C-617F-1D04-02D4979874EE" name="COMUNA">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>D8DCBCC3-1FDF-17F5-ED1C-67E96DB22D1B</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_REGION" id="0B2DA41E-0007-D7F4-85E6-50C68E708934">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>1AE9EAE8-5F50-3879-B326-08751ABC8E68</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOMBRE_COMUNA" id="8129EB2F-BB37-AC48-37B2-F17AA4232AEE">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>E6E82080-09BE-8D1A-D477-FDEFE83F7F79</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="REGION_ID_REGION" id="AAA545E7-44C0-14E2-816D-C9F1E6DB1597">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>E5C70F70-29B2-40CA-6D8A-B6B90F1393CE</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E38A665F-2F8A-42AE-7321-6704FF2B0EBA" referredColumn="C6C54ACF-D4D9-9DBC-1477-C22D1A368C33"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="710CEA99-4D1E-F51C-8041-4501AE5DF697" name="COMUNA_PK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>3BA1641F-D470-5481-D5DA-33F1C0D1BA16</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0B2DA41E-0007-D7F4-85E6-50C68E708934"/>
+<colUsage columnID="AAA545E7-44C0-14E2-816D-C9F1E6DB1597"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="652E42AD-F4B6-969E-8F0F-1C51669CE7BE" name="COMUNA_REGION_FK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>9B4B1156-6A56-A3D6-5A10-9A7C0F2D479A</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="AAA545E7-44C0-14E2-816D-C9F1E6DB1597"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="MERE FULLOPTIK" id="6BB10A3F-BD5D-1D40-680A-B8FBBBA801A1" version="3.5">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:14:14 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>6BB10A3F-BD5D-1D40-680A-B8FBBBA801A1</designId>
+</OSDM_Design>

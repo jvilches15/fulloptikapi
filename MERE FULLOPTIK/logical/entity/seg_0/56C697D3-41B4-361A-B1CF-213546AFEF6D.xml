@@ -1,0 +1,115 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="56C697D3-41B4-361A-B1CF-213546AFEF6D" name="OPTICAWEB_ADMINISTRACIONUSER">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:26:46 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="RUT" id="51534C93-8F87-3737-F761-B9CCF86E470F">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:27:08 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="NOMBRE" id="3A785C23-B5A3-7C96-85D4-67A859F6F098">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:27:08 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CORREO" id="397CB1D2-C017-F490-46B8-EDD60ABFAF85">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:27:09 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PASSWORD" id="F69D930E-8928-246B-0C70-5B3D5F9F9A09">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:27:51 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>8</dataTypeSize>
+<ownDataTypeParameters>8,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ROL" id="BE71AF1F-533B-84D3-448D-A2430A2BF92E">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:27:51 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<listOfValues>
+<valueDef value="ADMINSITRADOR" description=""/>
+<valueDef value="COLABORADOR" description=""/>
+</listOfValues>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ID" id="979A027D-22A1-3CDA-490E-BB1345AF50A9">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:31:20 UTC</createdTime>
+<generatorID>7F1791A0-3C76-B78A-148F-027EFB5D0F1E</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<referedAttribute>D225399E-2867-BCA8-686F-8E96EE9AF627</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="99D7B26C-768B-A733-24D0-4DF5B1D6C47C" name="OPTICAWEB_ADMINISTRACIONUSER PK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:28:10 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>51534C93-8F87-3737-F761-B9CCF86E470F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

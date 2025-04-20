@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="ECB94C65-33B7-B8BF-55FA-DCB1F6D58A0C" containerWithKeyObject="972CF225-C5F2-EBE3-16B3-EBD07F72534F" localFKIndex="E180BBE6-2C1C-7B0B-7E40-BC89EDB8D7DD" name="OPTICAWEB_CITA_OPTICAWEB_USERPROFILE_FK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>B491FEB6-8AD6-4D89-869E-8F06E075CE13</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<referredTableLongName>OPTICAWEB_USERPROFILE</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>A7EB5D2D-DECE-B454-82BE-735D257283C3</referredTableID>
+<keyObject>FB76B3B7-EDD1-0E17-ADCB-FC2ECCEA5801</keyObject>
+<referredKeyID>FB76B3B7-EDD1-0E17-ADCB-FC2ECCEA5801</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>RUT</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

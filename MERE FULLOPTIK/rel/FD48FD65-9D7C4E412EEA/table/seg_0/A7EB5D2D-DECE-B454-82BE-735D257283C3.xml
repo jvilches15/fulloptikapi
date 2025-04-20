@@ -1,0 +1,122 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A7EB5D2D-DECE-B454-82BE-735D257283C3" name="OPTICAWEB_USERPROFILE">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>5C3AF447-18DB-F718-5247-D24BB89AE589</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="RUT" id="5802E3AF-8BFA-B51E-28C7-7414391E529B">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>C53EE383-CD22-0BBC-39C2-6934F005F280</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,9,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="FECHA_NACIMIENTO" id="6257A75E-548A-4892-69AB-4F80BE6B3DF5">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>ED81B6CE-E403-A005-A5BA-436ABFB13235</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="DIRECCION" id="6799ADE6-74D8-EA56-3CC7-3FDEDE58942C">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>79566A7B-CA1D-E2FC-7BB5-12160246BE27</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="IMAGEN" id="2C44D231-7B33-59BA-6F7D-DFF8B8982F31">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>0D6706D7-97A5-5DB3-0027-B841834A91CE</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT010</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPTICAWEB_USUARIO_ID" id="B91DEFED-250A-4AF8-A662-6BE2FD2B041B">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>95EDC7E8-8432-02E5-5FA2-B2AED6D4FD82</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1FC9C90D-76C9-061E-649B-35C02F094F0E" referredColumn="E844BD81-7E18-D384-B7C1-8C166AF72ED3"/>
+</associations>
+</Column>
+<Column name="CORREO" id="068E2B96-602A-CFB1-7DA8-F775C68B4B3C">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>C793614B-30C4-A89D-28E4-809C3FBB9174</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FB76B3B7-EDD1-0E17-ADCB-FC2ECCEA5801" name="OPTICAWEB_USERPROFILE_PK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>7A63BBA8-6BFA-3530-9F91-CCC346F0DC89</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5802E3AF-8BFA-B51E-28C7-7414391E529B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="754EF200-54A3-3310-56EB-20584F96EC81" name="OPTICAWEB_USERPROFILE__IDX">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>B6CC4A44-ABC1-C57D-2649-7D184D0F736E</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="B91DEFED-250A-4AF8-A662-6BE2FD2B041B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="8ADF1C4F-B83E-0A66-1FD6-820A879F5425" name="OPTICAWEB_USERPROFILE_OPTICAWEB_USUARIO_FK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>B6CC4A44-ABC1-C57D-2649-7D184D0F736E</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B91DEFED-250A-4AF8-A662-6BE2FD2B041B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

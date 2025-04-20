@@ -1,0 +1,76 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7E4FA150-4C50-D79F-88FE-30D73ADB773A" name="REGION">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>650AE3BA-9E6D-9669-E4B5-7848D4C9C5DC</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_REGION" id="C6C54ACF-D4D9-9DBC-1477-C22D1A368C33">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>51DBC4E9-39B3-B381-B204-1FF9F43E3EBF</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NOMBRE_REGION" id="EBA14F19-8599-0DF8-ACEF-CFC622A80E0A">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>2C062D19-5B8B-84DB-6A3D-1F08ACCF2F3F</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="OPTICAWEB_USERPROFILE_RUT" id="CF02092B-AC77-D4BF-7EA4-FC2F508AACB3">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>E2AFBEF9-FD59-5D07-A676-060C6E173346</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>9</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="FAB07634-B339-B42F-7F26-AFBCF14E0038" referredColumn="5802E3AF-8BFA-B51E-28C7-7414391E529B"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="849E649D-DFAC-2624-C76F-4E7E8752240C" name="REGION_PK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>2F68CCD2-31CA-DB8F-BBA7-2EB52C913674</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6C54ACF-D4D9-9DBC-1477-C22D1A368C33"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0C3C939B-F00F-2CB6-C310-3CDE27D077C4" name="REGION_OPTICAWEB_USERPROFILE_FK">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:50:44 UTC</createdTime>
+<generatorID>4FF49F6F-A558-00C6-A438-93472EE35B92</generatorID>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CF02092B-AC77-D4BF-7EA4-FC2F508AACB3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

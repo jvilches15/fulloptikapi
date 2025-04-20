@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_8" directorySegmentName="seg_0" id="BE990255-18A8-E1A6-1BCD-EC5BC344CB93">
+<createdBy>jvilches</createdBy>
+<createdTime>2025-04-20 15:49:03 UTC</createdTime>
+<ownerDesignName>MERE FULLOPTIK</ownerDesignName>
+<engineerTo>
+<item key="FD48FD65-0882-F201-507B-9D7C4E412EEA" value="true"/>
+</engineerTo>
+<sourcePk>7A63BBA8-6BFA-3530-9F91-CCC346F0DC89</sourcePk>
+<identifying>true</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>5C3AF447-18DB-F718-5247-D24BB89AE589</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>22464E0D-80A6-A3B3-3F2E-C28447523A54</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
