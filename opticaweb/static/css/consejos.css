@@ -1,0 +1,44 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fadein {
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.list-group-item {
+    background-color: #fff;
+    border: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.list-group-item:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+}
+
+
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 10px; 
+    background-color: black;
+    z-index: 1030; 
+}
+
+body::before {
+    left: 0;
+}
+
+body::after {
+    right: 0;
+}

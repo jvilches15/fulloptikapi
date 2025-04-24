@@ -1,5 +1,5 @@
 body {
-    background-color: #f4f7fa;
+    background-color: #4e9dec;
     font-family: 'Arial', sans-serif;
     color: #333;
 }
@@ -24,7 +24,7 @@ table {
     width: 100%;
     margin-bottom: 30px;
     border-collapse: collapse;
-    background-color: #fff;
+    background-color: #d3b4b4;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -33,7 +33,7 @@ table {
 
 table th {
     background-color: #007bff;
-    color: white;
+    color: rgb(175, 106, 106);
     font-size: 1rem;
     padding: 12px 15px;
     text-align: center;
@@ -87,4 +87,49 @@ a {
 span {
     color: #999;
     font-style: italic;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem; 
+    }
+
+    .container {
+        padding: 15px; 
+    }
+
+    table th, table td {
+        font-size: 0.9rem; 
+        padding: 8px 10px; 
+    }
+
+    table {
+        margin-bottom: 20px; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.25rem; 
+    }
+
+    .container {
+        padding: 10px; 
+    }
+
+    table th, table td {
+        font-size: 0.85rem; 
+        padding: 6px 8px; 
+    }
+
+    img {
+        width: 40px; 
+        height: 40px; 
+    }
+
+    .btn-secondary {
+        padding: 8px 12px; 
+        font-size: 0.9rem; 
+    }
 }

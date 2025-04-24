@@ -1,6 +1,6 @@
 
 body {
-    background-color: #f8f9fa;
+    background-color: #3a88d6;
     font-family: 'Arial', sans-serif;
     color: #333;
 }
@@ -16,13 +16,13 @@ body {
 h2 {
     text-align: center;
     font-size: 2rem;
-    color: #007bff;
+    color: #09407c;
     margin-bottom: 30px;
 }
 
 
 form {
-    background-color: #ffffff;
+    background-color: #c7c422;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -94,4 +94,53 @@ input:invalid, textarea:invalid {
 
 input:valid, textarea:valid {
     border-color: #28a745;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 1.5rem; 
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    input[type="text"], input[type="number"], textarea, input[type="file"] {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-success, .btn-secondary {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.25rem; 
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    form {
+        padding: 10px;
+    }
+
+    input[type="text"], input[type="number"], textarea, input[type="file"] {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    .btn-success, .btn-secondary {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+    }
 }

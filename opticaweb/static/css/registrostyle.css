@@ -124,3 +124,65 @@ body {
     background-color: #1a252f;
   }
   
+  @media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem; 
+    }
+
+    header nav ul li {
+        margin-right: 0.5rem; 
+    }
+
+    main.container {
+        padding: 1rem; 
+        margin-top: 1rem;
+    }
+
+    form .btn {
+        padding: 0.5rem 1.5rem; 
+    }
+
+    form input, form select, form textarea {
+        padding: 0.4rem; 
+    }
+
+    nav ul button {
+        padding: 0.5rem 1rem; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem 1rem; 
+    }
+
+    header h1 {
+        font-size: 1.6rem; 
+    }
+
+    main.container {
+        padding: 0.5rem; 
+    }
+
+    form .btn {
+        padding: 0.5rem 1rem; 
+    }
+
+    nav ul button {
+        width: 100%; 
+    }
+
+    form input, form select, form textarea {
+        width: 100%; 
+    }
+
+    header nav ul {
+        text-align: left; 
+    }
+
+    header nav ul li {
+        display: block;
+        margin-bottom: 1rem; 
+    }
+}

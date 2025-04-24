@@ -1,19 +1,47 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import UserProfile, Region, Comuna
+from .models import UserProfile, Region, Comuna, Cita
 from django.contrib.auth.hashers import make_password
-from .models import Cita
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+import re
+
+
+
+def validar_rut_chileno(value):
+    if not re.match(r"^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$", value):
+        raise ValidationError("Ingrese un RUT válido. Ej: 12.345.678-9")
+
+def validar_password_segura(password):
+    if len(password) < 8:
+        raise ValidationError("La contraseña debe tener al menos 8 caracteres.")
+    if not re.search(r"[A-Z]", password):
+        raise ValidationError("Debe contener al menos una letra mayúscula.")
+    if not re.search(r"[a-z]", password):
+        raise ValidationError("Debe contener al menos una letra minúscula.")
+    if not re.search(r"\d", password):
+        raise ValidationError("Debe contener al menos un número.")
+    if not re.search(r"[!@#$%^&*(),.?\":{}|<>]", password):
+        raise ValidationError("Debe contener al menos un símbolo.")
+
+class RestablecerContrasenaForm(forms.Form):
+    rut = forms.CharField(max_length=20, label='RUT')
+    nueva_contraseña = forms.CharField(widget=forms.PasswordInput, label='Nueva contraseña', help_text="Debe ser de 8 caracteres, con mayúsculas, minúsculas, números y simbolos.")
+
+    def clean_nueva_contraseña(self):
+        contraseña = self.cleaned_data.get('nueva_contraseña')
+        validar_password_segura(contraseña)  
 
 class UserProfileForm(forms.ModelForm):
     full_name = forms.CharField(label="Nombre Completo")
-    rut = forms.CharField(label="RUT", help_text="Formato: 12.345.678-9")
-    email = forms.EmailField(label="Correo Electrónico")
-    password = forms.CharField(widget=forms.PasswordInput, label="Contraseña", min_length=8)
+    rut = forms.CharField(label="RUT", help_text="Formato: 12.345.678-9", validators=[validar_rut_chileno])
+    email = forms.EmailField(label="Correo Electrónico", help_text="Formato: user@dominio.cl", validators=[validate_email])
+    password = forms.CharField(widget=forms.PasswordInput, label="Contraseña", help_text="Debe ser de 8 caracteres, con mayúsculas, minúsculas, números y simbolos.", validators=[validar_password_segura])
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), label="Fecha de nacimiento")
     address = forms.CharField(label="Dirección")
-    region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Región", required=False)
-    comuna = forms.ModelChoiceField(queryset=Comuna.objects.none(), label="Comuna", required=False)
+    region = forms.ModelChoiceField(queryset=Region.objects.all(), label="Región", required=True)
+    comuna = forms.ModelChoiceField(queryset=Comuna.objects.none(), label="Comuna", required=True)
     image = forms.ImageField(label="Imagen de Perfil", required=False)
 
     class Meta:
@@ -23,7 +51,6 @@ class UserProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
 
-    
         if 'region' in self.data:
             try:
                 region_id = int(self.data.get('region'))
@@ -53,9 +80,10 @@ class UserProfileForm(forms.ModelForm):
         return user
 
 
+
 class EditProfileForm(forms.ModelForm):
     full_name = forms.CharField(label="Nombre Completo", max_length=100)
-    email = forms.EmailField(label="Correo Electrónico")
+    email = forms.EmailField(label="Correo Electrónico", validators=[validate_email])
     address = forms.CharField(label="Dirección", max_length=300)
     region = forms.ModelChoiceField(
         queryset=Region.objects.all(),
@@ -87,7 +115,6 @@ class EditProfileForm(forms.ModelForm):
                 self.fields['comuna'].initial = user.userprofile.comuna
                 self.fields['comuna'].queryset = Comuna.objects.filter(region=user.userprofile.region)
 
-   
         if 'region' in self.data:
             try:
                 region_id = int(self.data.get('region'))
@@ -107,6 +134,26 @@ class EditProfileForm(forms.ModelForm):
             profile.comuna = self.cleaned_data['comuna']
             profile.save()
         return user
+    
+class CrearUsuarioForm(forms.Form):
+    rut = forms.CharField(max_length=20, validators=[validar_rut_chileno])
+    nombre = forms.CharField(max_length=100)
+    email = forms.EmailField(label="Correo electrónico")
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    address = forms.CharField(max_length=200, required=True)
+    region = forms.ChoiceField(choices=[], required=True)
+    comuna = forms.ChoiceField(choices=[], required=True)
+    image = forms.ImageField(required=False)
+    password = forms.CharField(widget=forms.PasswordInput, validators=[validar_password_segura])
+
+    def __init__(self, *args, **kwargs):
+        regiones = kwargs.pop('regiones', [])
+        comunas = kwargs.pop('comunas', [])
+        super().__init__(*args, **kwargs)
+        self.fields['region'].choices = [(r.id, r.nombre) for r in regiones]
+        self.fields['comuna'].choices = [(c.id, c.nombre) for c in comunas]
+
+
 
 class CitaForm(forms.ModelForm):
     class Meta:
@@ -121,4 +168,34 @@ class CitaForm(forms.ModelForm):
         fecha = self.cleaned_data['fecha']
         if fecha < timezone.now():
             raise forms.ValidationError("No se puede agendar una fecha pasada.")
+        return fecha
+    
+def validar_fecha_cita(fecha):
+    
+    if fecha.weekday() > 4:  
+        raise ValidationError('Solo se pueden agendar citas de lunes a viernes.')
+    
+    
+    if not (fecha.hour >= 10 and fecha.hour <= 17):
+        raise ValidationError('La cita debe ser entre las 10:00 AM y las 5:00 PM.')
+
+class CitaForm(forms.ModelForm):
+    class Meta:
+        model = Cita
+        fields = ['fecha', 'motivo']
+        widgets = {
+            'fecha': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
+            'motivo': forms.Textarea(attrs={'rows': 3, 'class': 'form-control'}),
+        }
+
+    def clean_fecha(self):
+        fecha = self.cleaned_data['fecha']
+        
+        
+        if fecha < timezone.now():
+            raise forms.ValidationError("No se puede agendar una fecha pasada.")
+        
+       
+        validar_fecha_cita(fecha)
+        
         return fecha

@@ -92,6 +92,14 @@ class Cita(models.Model):
 
     def __str__(self):
         return f"{self.usuario.user.get_full_name()} - {self.fecha.strftime('%d/%m/%Y %H:%M')}"
+    
+class Consejo(models.Model):
+    titulo = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    fecha_publicacion = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.titulo
 
 # Create your models here.
 

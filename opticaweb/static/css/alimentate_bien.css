@@ -1,0 +1,48 @@
+
+footer {
+    background-color: #212529;
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+
+footer h5 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+
+footer .social-banner-footer a {
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+footer .social-banner-footer a:hover {
+    color: #4dd0e1;
+    transform: scale(1.1);
+}
+
+
+footer .copyright {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    background-color: #343a40;
+    padding: 1rem 0;
+    color: #0a0a0a;
+}
+
+
+@media (max-width: 576px) {
+    footer h5 {
+        font-size: 1rem;
+    }
+
+    footer .social-banner-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

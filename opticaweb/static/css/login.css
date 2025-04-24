@@ -81,4 +81,48 @@ body {
     font-weight: 500;
     padding: 10px 0;
   }
+
+  @media (max-width: 768px) {
+    .login-card {
+        width: 90%; 
+        padding: 20px;
+    }
+
+    .login-header {
+        padding: 15px; 
+    }
+
+    .login-header h2 {
+        font-size: 1.5rem; 
+    }
+
+    footer {
+        font-size: 0.9rem; 
+        padding: 10px; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .login-card {
+        width: 100%; 
+        padding: 15px; 
+    }
+
+    .login-header {
+        padding: 10px; 
+    }
+
+    .login-header h2 {
+        font-size: 1.25rem; 
+    }
+
+    footer {
+        font-size: 0.8rem; 
+    }
+
+    .animated-glasses {
+        height: 60px; 
+    }
+}
   

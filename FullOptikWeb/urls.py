@@ -15,15 +15,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from opticaweb import views
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls), 
+    path('', include('opticaweb.urls')),
+    path('api/', include('opticaweb.urls')),
+    path('consejos/', views.consejos_view, name='consejos'), 
+    path('consejos/', views.consejos_list, name='consejos_list'),
+    path('consejos/<int:id>/', views.consejo_detail, name='consejo_detail'),
+    path('alimentate-bien/', views.recetas_saludables_view, name='alimentate_bien'),
     path('admin-login/', views.admin_login, name='login_admin'),
     path('', views.index, name='index'),
     path('login/', views.login_view, name='login'),
@@ -50,6 +59,8 @@ urlpatterns = [
     path('logout/', views.cerrar_sesion, name='logout'),
     path('reset-password/', views.reset_password_page, name='reset_password'), 
     path('ajax/cargar-comunas/', views.cargar_comunas, name='cargar_comunas'),
+    
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

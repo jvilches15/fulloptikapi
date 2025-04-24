@@ -13,7 +13,6 @@ from django.contrib.auth.hashers import make_password
 from .models import Comuna
 from .models import AdministracionUser
 from .models import Region, Comuna
-from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 from django.http import Http404
 from .models import Producto
@@ -22,7 +21,23 @@ from .forms import CitaForm
 from .models import Cita
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib import messages
+import re
+from django.core.exceptions import ValidationError
+from .forms import RestablecerContrasenaForm
+from .forms import CrearUsuarioForm
+from rest_framework import viewsets
+from .models import Consejo
+from .serializers import ConsejoSerializer
+import requests
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+from rest_framework.decorators import permission_classes, authentication_classes
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+import requests
+from rest_framework.response import Response
+from .permissions import SoloLecturaOAutenticado
+
 
 
 def es_admin(user):
@@ -76,42 +91,38 @@ def admin_login(request):
 
 
 def crear_usuario(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        rut = request.POST.get('rut')
-        fecha_nacimiento = request.POST.get('date_of_birth')
-        direccion = request.POST.get('address')
-        region_id = request.POST.get('region')
-        comuna_id = request.POST.get('comuna')
-        imagen = request.FILES.get('image')
-     
-
-       
-        user = User.objects.create_user(
-            username=rut,
-            first_name=nombre,
-            password='temporal123'  
-        )
-
-       
-        UserProfile.objects.create(
-            user=user,
-            rut=rut,
-            date_of_birth=fecha_nacimiento,
-            address=direccion,
-            region_id=region_id,
-            comuna_id=comuna_id,
-            image=imagen,
-            
-        )
-
-        messages.success(request, "Usuario creado correctamente.")
-        return redirect('panel_administrador')
-
- 
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
+
+    if request.method == 'POST':
+        form = CrearUsuarioForm(request.POST, request.FILES, regiones=regiones, comunas=comunas)
+        if form.is_valid():
+            cd = form.cleaned_data
+
+            user = User.objects.create_user(
+                username=cd['rut'],
+                first_name=cd['nombre'],
+                email=cd['email'],
+                password=cd['password']
+            )
+
+            UserProfile.objects.create(
+                user=user,
+                rut=cd['rut'],
+                date_of_birth=cd['date_of_birth'],
+                address=cd['address'],
+                region_id=cd['region'],
+                comuna_id=cd['comuna'],
+                image=cd['image']
+            )
+
+            messages.success(request, "Usuario creado correctamente.")
+            return redirect('panel_administrador')
+    else:
+        form = CrearUsuarioForm(regiones=regiones, comunas=comunas)
+
     return render(request, 'crear_usuario.html', {
+        'form': form,
         'regions': regiones,
         'comunas': comunas
     })
@@ -195,7 +206,7 @@ def registro(request):
         form = UserProfileForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('perfil')
+            return redirect('login')
      else:
         form = UserProfileForm()
     
@@ -353,6 +364,108 @@ def eliminar_cita(request, cita_id):
 def cerrar_sesion(request):
     logout(request)
     return redirect('index')
+
+
+#API
+class ConsejoViewSet(viewsets.ModelViewSet):
+    queryset = Consejo.objects.all()
+    serializer_class = ConsejoSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    permission_classes = [SoloLecturaOAutenticado]
+    
+
+    
+def consejos_view(request):
+    url = "http://127.0.0.1:8000/api/consejos/"
+    try:
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            consejos = response.json()  
+        else:
+            consejos = []  
+    except requests.exceptions.RequestException as e:
+        print(f"Error al obtener los consejos: {e}")
+        consejos = []  
+    
+   
+    return render(request, 'consejos.html', {'consejos': consejos})
+
+@csrf_exempt
+@api_view(['GET', 'POST'])
+def consejos_list(request):
+    if request.method == 'GET':
+        consejos = Consejo.objects.all()
+        serializer = ConsejoSerializer(consejos, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+      
+        if not request.user.is_authenticated:
+            return JsonResponse({'detail': 'No autorizado'}, status=401)
+        
+        serializer = ConsejoSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+
+
+@csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
+def consejo_detail(request, id):
+    try:
+        consejo = Consejo.objects.get(id=id)
+    except Consejo.DoesNotExist:
+        return JsonResponse({'message': 'Consejo no encontrado'}, status=404)
+
+    if request.method == 'GET':
+        serializer = ConsejoSerializer(consejo)
+        return JsonResponse(serializer.data)
+
+    
+    if not request.user.is_authenticated:
+        return JsonResponse({'detail': 'No autorizado'}, status=401)
+
+    if request.method == 'PUT':
+        serializer = ConsejoSerializer(consejo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        consejo.delete()
+        return JsonResponse({'message': 'Consejo eliminado'}, status=204)
+
+
+
+
+def recetas_saludables_view(request):
+   
+    busqueda = request.GET.get('q', '')  
+    
+    
+    if busqueda:
+        url = f'https://www.themealdb.com/api/json/v1/1/search.php?s={busqueda}'
+    else:
+        url = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=carrot'  
+    
+    try:
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            recetas = data.get('meals', [])  
+        else:
+            recetas = []
+    except Exception as e:
+        print(f"Error al obtener recetas: {e}")
+        recetas = []
+
+    return render(request, 'recetas.html', {'recetas': recetas, 'busqueda': busqueda})
 
 
 

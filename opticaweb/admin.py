@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import check_password
 from .models import Producto
 from .models import Venta
 from .models import Cita
+from .models import Consejo
 
 from django.contrib import admin
 from django.contrib.auth.hashers import check_password
@@ -27,3 +28,4 @@ admin.site.register(AdministracionUser, AdministracionUserAdmin)
 admin.site.register(Producto)
 admin.site.register(Venta)
 admin.site.register(Cita)
+admin.site.register(Consejo)

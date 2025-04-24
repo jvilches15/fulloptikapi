@@ -107,7 +107,7 @@ h4 {
 }
 
 .list-group-item {
-    background-color: #f8f9fa;
+    background-color: #aeceee;
     border: 1px solid #dee2e6;
     border-radius: 8px;
     margin-bottom: 10px;
@@ -142,4 +142,64 @@ a.btn {
 a.btn:hover,
 button:hover {
     transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px; 
+    }
+
+    h2 {
+        font-size: 1.8rem; 
+    }
+
+    img#profile-image {
+        width: 120px;
+        height: 120px; 
+    }
+
+    .btn, .btn-lg {
+        width: 100%; 
+        font-size: 1rem;
+    }
+
+    .mb-3 {
+        margin-bottom: 20px;
+    }
+
+    h4 {
+        font-size: 1.25rem;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .container {
+        padding: 15px; 
+    }
+
+    h2 {
+        font-size: 1.6rem; 
+    }
+
+    img#profile-image {
+        width: 100px;
+        height: 100px; 
+    }
+
+    .btn, .btn-lg {
+        font-size: 0.9rem; 
+    }
+
+    .profile-image-container {
+        flex-direction: column; 
+    }
+
+    .list-group-item {
+        padding: 8px 10px; 
+    }
+
+    .mt-3 .btn-outline-success {
+        width: 100%; 
+    }
 }

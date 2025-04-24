@@ -39,3 +39,60 @@ nav ul li a:hover {
   height: 350px;
   border-radius: 8px;
 }
+
+
+
+@media (max-width: 768px) {
+
+  header {
+    padding: 15px; 
+  }
+
+
+  nav ul {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  nav ul li {
+    display: block; 
+    margin-bottom: 10px;
+  }
+
+  .carousel-container {
+    max-width: 100%; 
+    padding: 0 15px;
+  }
+
+  .map-container {
+    max-width: 100%; 
+    margin: 20px 0;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  header {
+    padding: 10px; 
+  }
+
+
+  nav ul {
+    padding: 5px 0;
+  }
+
+  nav ul li {
+    margin-bottom: 8px;
+  }
+
+
+  .carousel-container, .map-container {
+    max-width: 100%; 
+    padding: 0;
+  }
+
+  .map-container iframe {
+    height: 300px; 
+  }
+}
