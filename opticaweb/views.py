@@ -467,6 +467,7 @@ def recetas_saludables_view(request):
 
     return render(request, 'recetas.html', {'recetas': recetas, 'busqueda': busqueda})
 
-
+def clima_view(request):
+    return render(request, 'clima.html')
 
 # Create your views here.
