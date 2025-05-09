@@ -2,24 +2,51 @@
 {% block title %}Panel Administrador{% endblock %}
 {% block content %}
 <div class="container mt-5">
-    <div class="card shadow-lg rounded">
-      <div class="card-header bg-primary text-white">
-        <h3 class="mb-0">Panel de Administrador</h3>
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Panel de Administrador</h3>
+    </div>
+    <div class="card-body">
+
+      <div class="list-group mb-4">
+        <a href="{% url 'crear_usuario' %}" class="list-group-item list-group-item-action">
+          ➕ Crear Usuario
+        </a>
+        <a href="{% url 'lista_usuarios' %}" class="list-group-item list-group-item-action">
+          👥 Lista de Usuarios
+        </a>
+        <a href="{% url 'ingresar_producto' %}" class="list-group-item list-group-item-action">
+          📦 Ingresar Producto
+        </a>
       </div>
-      <div class="card-body">
-        <div class="list-group">
-          <a href="{% url 'crear_usuario' %}" class="list-group-item list-group-item-action">
-            ➕ Crear Usuario
-          </a>
-          <a href="{% url 'lista_usuarios' %}" class="list-group-item list-group-item-action">
-            👥 Ver Usuarios Registrados
-          </a>
-          <a href="{% url 'ingresar_producto' %}" class="list-group-item list-group-item-action">
-            📦 Ingresar Producto
-          </a>
-          
-        </div>
-      </div>
+
+      <h5 class="mb-3">📦 Productos Registrados</h5>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for producto in productos %}
+          <tr>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>${{ producto.precio }}</td>
+            <td>
+              <form action="{% url 'eliminar_producto' producto.id %}" method="post">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-sm" type="submit">Eliminar</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

@@ -5,6 +5,8 @@ from .views import consejos_view
 from .views import recetas_saludables_view
 from .viewsLogin import login_api
 from .views import clima_view
+from .views import ver_promociones
+from .views import PromocionListCreateAPIView, PromocionRetrieveUpdateDestroyAPIView
 
 
 router = DefaultRouter()
@@ -16,5 +18,9 @@ urlpatterns = [
     path('alimentate-bien/', recetas_saludables_view, name='alimentate_bien'),
     path('login-api/', login_api, name= "login_api"),
     path('clima/', clima_view, name='clima'),
+    path('promociones/', ver_promociones, name='ver_promociones'),
+    path('api/promociones/', PromocionListCreateAPIView.as_view(), name='promocion-lista-creada'),
+    path('api/promociones/<int:pk>/', PromocionRetrieveUpdateDestroyAPIView.as_view(), name='promocion-detalle'),
+   
    
 ]

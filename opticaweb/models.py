@@ -5,6 +5,7 @@ from django.utils import timezone
 
 
 
+
 class Region(models.Model):
     id = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
@@ -85,13 +86,22 @@ class Venta(models.Model):
         super(Venta, self).save(*args, **kwargs)
         
 class Cita(models.Model):
+    ESTADOS = [
+        ('pendiente', 'Pendiente'),
+        ('confirmada', 'Confirmada'),
+        ('rechazada', 'Rechazada'),
+    ]
+    
     usuario = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='citas')
     fecha = models.DateTimeField()
     motivo = models.TextField()
-    confirmada = models.BooleanField(default=False)
+    estado = models.CharField(max_length=10, choices=ESTADOS, default='pendiente')
 
     def __str__(self):
         return f"{self.usuario.user.get_full_name()} - {self.fecha.strftime('%d/%m/%Y %H:%M')}"
+
+    def get_estado_display(self):
+        return dict(self.ESTADOS).get(self.estado, 'Pendiente')
     
 class Consejo(models.Model):
     titulo = models.CharField(max_length=200)
@@ -101,7 +111,15 @@ class Consejo(models.Model):
     def __str__(self):
         return self.titulo
     
+class Promocion(models.Model):
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField(blank=True)
+    fecha_inicio = models.DateField()
+    fecha_fin = models.DateField()
+    activa = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.titulo} ({'Activa' if self.activa else 'Inactiva'})"
 
   
 

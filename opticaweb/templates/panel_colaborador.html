@@ -3,21 +3,49 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="card shadow-lg rounded">
-      <div class="card-header bg-success text-white">
-        <h3 class="mb-0">Panel de Colaborador</h3>
+  <div class="card shadow-lg rounded">
+    <div class="card-header bg-success text-white">
+      <h3 class="mb-0">Panel de Colaborador</h3>
+    </div>
+    <div class="card-body">
+      <div class="list-group mb-4">
+        <a href="{% url 'lista_usuarioss' %}" class="list-group-item list-group-item-action">
+          👁 Ver Usuarios Registrados
+        </a>
+        <a href="{% url 'lista_productoss' %}" class="list-group-item list-group-item-action">
+          📦 Lista de Productos
+        </a>
+
+        {% if citas %}
+          {% for cita in citas %}
+            <a href="{% url 'gestionar_cita' cita.id %}" class="list-group-item list-group-item-action">
+              <i class="bi bi-calendar-check"></i> 📅 Gestionar Cita Oftalmológica de {{ cita.usuario.user.get_full_name }} - {{ cita.fecha|date:"d/m/Y H:i" }}
+            </a>
+          {% endfor %}
+        {% else %}
+          <span class="list-group-item text-muted">No hay citas disponibles</span>
+        {% endif %}
       </div>
-      <div class="card-body">
-        <div class="list-group">
-          <a href="{% url 'lista_usuarios_colab' %}" class="list-group-item list-group-item-action">
-            👥 Ver Usuarios Registrados
-          </a>
-          <a href="{% url 'lista_productos' %}" class="list-group-item list-group-item-action">
-            📦 Lista de Productos
-          </a>
-        </div>
-      
+
+      <h5>Generar Reportes:</h5>
+      <div class="d-flex flex-wrap gap-2">
+        <a href="{% url 'reporte_usuarios_excel' %}" class="btn btn-outline-primary">
+          📥 Usuarios Excel
+        </a>
+        <a href="{% url 'reporte_usuarios_pdf' %}" class="btn btn-outline-danger">
+          📄 Usuarios PDF
+        </a>
+        <a href="{% url 'reporte_productos_excel' %}" class="btn btn-outline-primary">
+          📥 Productos Excel
+        </a>
+        <a href="{% url 'reporte_productos_pdf' %}" class="btn btn-outline-danger">
+          📄 Productos PDF
+        </a>
       </div>
+
     </div>
   </div>
-  {% endblock %}
+</div>
+
+{% endblock %}
+

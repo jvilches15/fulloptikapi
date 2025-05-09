@@ -26,18 +26,36 @@ from django.core.exceptions import ValidationError
 from .forms import RestablecerContrasenaForm
 from .forms import CrearUsuarioForm
 from rest_framework import viewsets
-from .models import Consejo
-from .serializers import ConsejoSerializer
-import requests
-from django.views.decorators.csrf import csrf_exempt
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes, authentication_classes
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-import requests
 from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from .models import Consejo
+from .models import Promocion
+from .serializers import ConsejoSerializer
+from .serializers import PromocionSerializer
+import requests
+from django.views.decorators.csrf import csrf_exempt
+import requests
 from .permissions import SoloLecturaOAutenticado
-
+from .decorators import solo_admin, solo_colaborador
+from openpyxl import Workbook
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+import pandas as pd
+from .models import User
+from reportlab.lib.units import inch
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
+from reportlab.lib.styles import getSampleStyleSheet
+import os
+from django.conf import settings
 
 
 def es_admin(user):
@@ -89,7 +107,7 @@ def admin_login(request):
     return render(request, 'login_admin.html')
 
 
-
+@solo_admin
 def crear_usuario(request):
     regiones = Region.objects.all()
     comunas = Comuna.objects.all()
@@ -133,13 +151,13 @@ def lista_usuarios(request):
     usuarios = User.objects.filter(is_staff=False)  
     return render(request, 'lista_usuarios.html', {'usuarios': usuarios})
 
-def lista_usuarios_colab(request):
+def lista_usuarioss(request):
   
     usuarios = User.objects.filter(is_staff=False)  
-    return render(request, 'lista_usuarios_colab.html', {'usuarios': usuarios})
+    return render(request, 'lista_usuarioss.html', {'usuarios': usuarios})
 
 
-
+@solo_admin
 def ingresar_producto(request):
     if request.method == 'POST':
         nombre = request.POST.get('nombre')
@@ -163,6 +181,169 @@ def ingresar_producto(request):
 
     return render(request, 'ingresar_producto.html')
 
+from django.http import HttpResponse
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, Image
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import inch
+from django.contrib.auth.models import User
+import os
+from django.conf import settings
+
+def reporte_usuarios_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_usuarios.pdf"'
+
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+    styles = getSampleStyleSheet()
+
+   
+    logo_path = os.path.join(settings.BASE_DIR, 'opticaweb', 'static', 'img', 'Full-optik.jpg')
+    if os.path.exists(logo_path):
+        img = Image(logo_path, width=1.5*inch, height=1.0*inch)
+        img.hAlign = 'CENTER'
+        elements.append(img)
+
+   
+    title = Paragraph("Reporte de Usuarios", styles['Title'])
+    elements.append(title)
+    elements.append(Spacer(1, 12))
+
+    
+    data = [[
+        "RUT", "Nombre", "Email", "Nacimiento", "Dirección", "Región", "Comuna"
+    ]]
+
+    
+    usuarios = User.objects.filter(is_staff=False)
+    for u in usuarios:
+        perfil = getattr(u, 'userprofile', None)
+        if perfil:
+            data.append([
+                perfil.rut,
+                u.get_full_name(),
+                u.email,
+                perfil.date_of_birth.strftime('%d-%m-%Y') if perfil.date_of_birth else '',
+                perfil.address,
+                perfil.region.nombre if perfil.region else '',
+                perfil.comuna.nombre if perfil.comuna else '',
+            ])
+
+    
+    table = Table(data, repeatRows=1, colWidths=[70, 100, 120, 70, 100, 70, 70])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#3498db")),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+        ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 1), (-1, -1), 9),
+    ]))
+
+    elements.append(table)
+    doc.build(elements)
+
+    return response
+
+
+def reporte_usuarios_excel(request):
+    usuarios = User.objects.filter(is_staff=False)
+
+    data = []
+    for u in usuarios:
+        perfil = getattr(u, 'userprofile', None)
+        if perfil:
+            data.append({
+                'RUT': perfil.rut,
+                'Nombre': u.get_full_name(),
+                'Email': u.email,
+                'Nacimiento': perfil.date_of_birth.strftime('%d-%m-%Y') if perfil.date_of_birth else '',
+                'Dirección': perfil.address,
+                'Comuna': perfil.comuna.nombre if perfil.comuna else '',
+                'Región': perfil.region.nombre if perfil.region else '',
+            })
+
+    df = pd.DataFrame(data)
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="usuarios.xlsx"'
+    df.to_excel(response, index=False)
+
+    return response
+
+
+@solo_colaborador
+def reporte_productos_excel(request):
+    productos = Producto.objects.all()
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Productos"
+
+    ws.append(['Nombre', 'Descripcion', 'Precio', 'Stock'])
+
+    for p in productos:
+        ws.append([p.nombre, p.descripcion, p.precio, p.stock])
+
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename="productos.xlsx"'
+    wb.save(response)
+    return response
+
+@solo_colaborador
+def reporte_productos_pdf(request):
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_productos.pdf"'
+
+    doc = SimpleDocTemplate(response, pagesize=letter)
+    elements = []
+    styles = getSampleStyleSheet()
+
+    
+    logo_path = os.path.join(settings.BASE_DIR, 'opticaweb', 'static', 'img', 'Full-optik.jpg')
+    if os.path.exists(logo_path):
+        img = Image(logo_path, width=1.5*inch, height=1.0*inch)
+        img.hAlign = 'CENTER'
+        elements.append(img)
+
+   
+    title = Paragraph("Reporte de Productos", styles['Title'])
+    elements.append(title)
+    elements.append(Spacer(1, 12))
+
+   
+    data = [["Nombre", "Descripción", "Precio", "Stock"]]
+
+   
+    productos = Producto.objects.all()
+    for p in productos:
+        data.append([
+            p.nombre,
+            p.descripcion,
+            f"${p.precio:,.0f}",
+            p.stock
+        ])
+
+    
+    table = Table(data, repeatRows=1, colWidths=[120, 200, 70, 50])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#2ecc71")),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('ALIGN', (2, 1), (3, -1), 'RIGHT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 8),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+    ]))
+
+    elements.append(table)
+    doc.build(elements)
+    return response
 
 
 def panel_administrador(request):
@@ -174,7 +355,8 @@ def panel_administrador(request):
 
 def panel_colaborador(request):
     if request.session.get('admin_user_id'):
-        return render(request, 'panel_colaborador.html')
+        citas = Cita.objects.all()
+        return render(request, 'panel_colaborador.html', {'citas': citas})
     return redirect('admin_login')
 
 @login_required
@@ -297,26 +479,60 @@ def reset_password_page(request):
 
     return render(request, 'reset_password.html')
 
+@solo_admin
 def eliminar_producto(request, producto_id):
-    
+    if request.session.get('admin_user_rol') != 'administrador':
+        return redirect('panel_usuario')
+
     producto = get_object_or_404(Producto, id=producto_id)
+    producto.delete()
+    return redirect('panel_administrador')
 
-    
-    if request.method == 'POST':
-        producto.delete()
-        messages.success(request, "Producto eliminado correctamente.")
-        return redirect('lista_productos')  
 
-  
-    return render(request, 'confirmar_eliminacion_producto.html', {'producto': producto})
-
+@solo_admin
 def lista_productos(request):
     productos = Producto.objects.all()
     return render(request, 'lista_productos.html', {'productos': productos})
 
+@solo_colaborador
+def lista_productoss(request):
+    productos = Producto.objects.all()
+    return render(request, 'lista_productoss.html', {'productos': productos})
+
 def lista_ventas(request):
     ventas = Venta.objects.all()
     return render(request, 'lista_ventas.html', {'ventas': ventas})
+
+@solo_admin
+def eliminar_usuario(request, usuario_id):
+    usuario = get_object_or_404(User, id=usuario_id)
+    usuario.delete()
+    messages.success(request, 'Usuario eliminado correctamente.')
+    return redirect('lista_usuarios')
+
+@solo_admin
+def eliminar_producto(request, producto_id):
+    if request.method == 'POST' and request.session.get('admin_user_rol') == 'administrador':
+        producto = get_object_or_404(Producto, id=producto_id)
+        producto.delete()
+        messages.success(request, 'Producto eliminado correctamente.')
+    return redirect('lista_productos')
+
+@solo_colaborador 
+def gestionar_cita(request, cita_id):
+    cita = get_object_or_404(Cita, id=cita_id)
+
+    if request.method == 'POST':
+        nuevo_estado = request.POST.get('estado')
+        if nuevo_estado in ['pendiente', 'confirmada', 'rechazada']:
+            cita.estado = nuevo_estado
+            cita.save()
+            messages.success(request, f"Estado de la cita actualizado a {nuevo_estado}.")
+            
+            
+            return redirect('panel_colaborador')  
+
+    return render(request, 'gestionar_cita.html', {'cita': cita})
 
 @login_required
 def agendar_cita(request):
@@ -442,8 +658,6 @@ def consejo_detail(request, id):
         return JsonResponse({'message': 'Consejo eliminado'}, status=204)
 
 
-
-
 def recetas_saludables_view(request):
    
     busqueda = request.GET.get('q', '')  
@@ -469,5 +683,20 @@ def recetas_saludables_view(request):
 
 def clima_view(request):
     return render(request, 'clima.html')
+
+def ver_promociones(request):
+    promociones = Promocion.objects.all()
+    return render(request, 'promociones.html', {'promociones': promociones})
+
+class PromocionListCreateAPIView(ListCreateAPIView):
+    queryset = Promocion.objects.all()
+    serializer_class = PromocionSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]  
+
+class PromocionRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Promocion.objects.all()
+    serializer_class = PromocionSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]  
+
 
 # Create your views here.

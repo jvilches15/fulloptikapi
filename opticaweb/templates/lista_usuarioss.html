@@ -40,7 +40,6 @@
                             <th>Dirección</th>
                             <th>Región</th>
                             <th>Comuna</th>
-                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,31 +58,6 @@
                             <td>{{ usuario.userprofile.region.nombre }}</td>
                             <td>{{ usuario.userprofile.comuna.nombre }}</td>
                             <td>
-                            
-                               
-                                <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal{{ usuario.id }}">
-                                    Eliminar
-                                </button>
-
-                        
-                                <div class="modal fade" id="confirmModal{{ usuario.id }}" tabindex="-1" aria-labelledby="modalLabel{{ usuario.id }}" aria-hidden="true">
-                                  <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content rounded-4">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="modalLabel{{ usuario.id }}">Confirmar eliminación</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                                      </div>
-                                      <div class="modal-body">
-                                        ¿Estás seguro de que deseas eliminar a <strong>{{ usuario.nombre }}</strong>?
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <a href="{% url 'eliminar_usuario' usuario.id %}" class="btn btn-danger">Eliminar</a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -91,7 +65,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <a href="{% url 'panel_administrador' %}" class="btn btn-outline-primary">Volver</a>
+                <a href="{% url 'panel_colaborador' %}" class="btn btn-outline-primary">Volver</a>
             </div>
         </div>
     </div>

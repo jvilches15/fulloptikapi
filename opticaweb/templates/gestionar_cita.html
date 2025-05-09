@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2>Gestionar Cita</h2>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">Motivo:</label>
+        <p>{{ cita.motivo }}</p>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Estado:</label>
+        <select name="estado" class="form-control">
+          <option value="pendiente" {% if cita.estado == 'pendiente' %}selected{% endif %}>Pendiente</option>
+          <option value="confirmada" {% if cita.estado == 'confirmada' %}selected{% endif %}>Confirmada</option>
+          <option value="rechazada" {% if cita.estado == 'rechazada' %}selected{% endif %}>Rechazada</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Actualizar Estado</button>
+    </form>
+  </div>
+{% endblock %}
